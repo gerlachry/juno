@@ -3,7 +3,7 @@ from pyxley.charts.mg import LineChart
 
 
 class ESSensorLineChart(LineChart):
-    def __init__(self, df, figure, x, y, es_helper, title="Line Chart",
+    def __init__(self, figure, x, y, es_helper, title="Line Chart",
                  description="Line Chart", init_params={}, timeseries=False,
                  route_func=None):
 

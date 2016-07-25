@@ -26,7 +26,7 @@ def build_ui(app, es_helper):
     fig.graphics.animate_on_load()
     fig.layout.set_size(width=450, height=200)
     fig.layout.set_margin(left=40, right=40)
-    lc = ESSensorLineChart(None, fig, "Date", ["Basement Temperature"], es_helper, init_params={"Data": "Basement Temperature"},
+    lc = ESSensorLineChart(fig, "Date", ["Basement Temperature"], es_helper, init_params={"Data": "Basement Temperature"},
                    timeseries=True)
     ui.add_chart(lc)
 
