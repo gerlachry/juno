@@ -8,16 +8,12 @@ from es_helper import ESHelper
 
 app = Flask(__name__)
 
-elastic = ESHelper(host='172.17.0.2', port='9200')
+elastic = ESHelper(host='localhost', port='9200')
 
 build_ui(app, elastic)
 scripts = []
 css = ["./css/main.css"]
 
-@app.route('/test')
-def test():
-    results = elastic.test()
-    return jsonify(results)
 
 @app.route('/')
 @app.route('/index')

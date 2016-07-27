@@ -1,13 +1,14 @@
 import os
 from pyxley import UILayout
-from pyxley.charts.mg import Figure
+from pyxley.charts.mg import Figure, LineChart
 from pyxley.filters import SelectButton
 
 from charts.es_charts import ESSensorLineChart
 
 DIR = os.path.dirname(os.path.realpath(__file__))
 
-def build_ui(app, es_helper):
+
+def build_ui(app, db):
     ui = UILayout(
         "FilterChart",
         "pyxley",
@@ -25,13 +26,11 @@ def build_ui(app, es_helper):
     fig = Figure("/sensors-chart/", "sensors-chart")
     fig.graphics.transition_on_update(True)
     fig.graphics.animate_on_load()
-    fig.layout.set_size(width=600, height=400)
+    fig.layout.set_size(width=1200, height=300)
     fig.layout.set_margin(left=40, right=40)
-    lc = ESSensorLineChart(fig, "Date", ["Basement Temperature"], es_helper, init_params={"Data": "Basement Temperature"},
-                   timeseries=True, description="Sensor Data")
+    lc = LineChart(None, fig, "Date", ["Basement Temperature"], init_params={"Data": "Basement Temperature"},
+                   route_func=db.get_data, timeseries=True, title='Sensor Data', description="Data from IoT sensors")
     ui.add_chart(lc)
-    print(os.getcwd())
-    print(DIR)
     sb = ui.render_layout(app, os.path.join(DIR, "static/layout.js"))
 
     # Create a webpack file and bundle our javascript
