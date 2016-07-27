@@ -28,11 +28,7 @@ class ESSensorLineChart(LineChart):
                         args[c] = request.args[c]
                     else:
                         args[c] = init_params[c]
-                data_frame = self.es_helper.test_df()
-                return jsonify(LineChart.to_json(
-                    self.apply_filters(data_frame, args),
-                    x,
-                    y,
+                return jsonify(self.es_helper.get_data(args,
                     timeseries=timeseries
                 ))
 

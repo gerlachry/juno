@@ -1,12 +1,10 @@
 import sys
-
-from juno.views import build_ui
-
 print(sys.path)
+from views import build_ui
 
 from flask import Flask, jsonify, render_template
 
-from juno.es_helper import ESHelper
+from es_helper import ESHelper
 
 app = Flask(__name__)
 

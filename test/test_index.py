@@ -6,9 +6,9 @@ from elasticsearch import Elasticsearch
 
 def create_test_index():
     es = Elasticsearch(host='172.17.0.2', port='9200')
-    temp = 69.0
+    temp = 75.0
     humidity = 22.0
-    for i in range(0, 20):
+    for i in range(0, 2):
         body = {
             'timestamp': datetime.datetime.now(),
             'temperature': temp,
@@ -16,7 +16,7 @@ def create_test_index():
         }
         bodyH = {
             'timestamp': datetime.datetime.now(),
-            'humidiry': temp,
+            'humidity': humidity,
             'feed_name': 'basement_humidity'
         }
         resp = es.index(index='basement_temperature', doc_type='sensor', id=None,  body=body)
