@@ -2,24 +2,7 @@ import logging
 from datetime import datetime
 from flask import request, jsonify
 from elasticsearch import Elasticsearch
-
-INDEXES = {'Basement Temperature': 'basement_temperature',
-           'Basement Humidity': 'basement_humidity'}
-FIELDS = {
-    'Basement Temperature': 'temperature',
-    'Basement Humidity': 'humidity'
-}
-
-AVG_QUERY = {
-            "aggs": {
-                "per_day": {
-                    "date_histogram": {
-                        "field": "timestamp",
-                        "interval": "day"
-                    },
-                }
-            }
-        }
+from config import config
 
 
 class ESHelper(object):
@@ -29,11 +12,11 @@ class ESHelper(object):
 
     @staticmethod
     def _build_query(typ):
-        query = AVG_QUERY
+        query = config.AVG_QUERY
         query['aggs']['per_day']['aggs'] = {
-            'avg_' + FIELDS[typ]: {
+            'avg_' + config.FIELDS[typ]: {
                 'avg': {
-                    'field': FIELDS[typ]
+                    'field': config.FIELDS[typ]
                 }
             }
         }
@@ -41,11 +24,11 @@ class ESHelper(object):
 
     def get_data(self):
         typ = request.args['Data']
-        results = self.es.search(index=INDEXES[typ], body=self._build_query(typ))
+        results = self.es.search(index=config.INDEXES[typ], body=self._build_query(typ))
         data = []
         for bucket in results['aggregations']['per_day']['buckets']:
             dt = datetime.strptime(bucket['key_as_string'], '%Y-%m-%dT%H:%M:%S.%fZ')
-            if bucket['avg_' + FIELDS[typ]]['value']:
+            if bucket['avg_' + config.FIELDS[typ]]['value']:
                 data.append({'x': dt.strftime('%Y-%m-%d'),
-                             'y': bucket['avg_' + FIELDS[typ]]['value']})
+                             'y': bucket['avg_' + config.FIELDS[typ]]['value']})
         return jsonify({'result': [data, ], 'date': True})

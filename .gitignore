@@ -2,3 +2,4 @@
 .idea/
 __pycache__/
 juno/node_modules/
+juno/config/config.py

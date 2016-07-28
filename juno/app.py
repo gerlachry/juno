@@ -1,14 +1,11 @@
-import sys
-print(sys.path)
 from views import build_ui
-
-from flask import Flask, jsonify, render_template
-
+from flask import Flask, render_template
 from es_helper import ESHelper
+from config import config
 
 app = Flask(__name__)
 
-elastic = ESHelper(host='localhost', port='9200')
+elastic = ESHelper(host=config.ES_HOST, port=config.ES_PORT)
 
 build_ui(app, elastic)
 scripts = []
