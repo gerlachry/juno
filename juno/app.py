@@ -22,6 +22,9 @@ def index():
                            page_scripts=_scripts,
                            css=css)
 
+@app.route('/latest/<typ>')
+def latest(typ):
+    return elastic.get_latest_reading(typ)
 
 if __name__ == '__main__':
     app.run(debug=True)
