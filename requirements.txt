@@ -1,0 +1,14 @@
+click==6.6
+elasticsearch==2.3.0
+Flask==0.11.1
+itsdangerous==0.24
+Jinja2==2.8
+MarkupSafe==0.23
+numpy==1.11.1
+pandas==0.18.1
+python-dateutil==2.5.3
+pytz==2016.6.1
+pyxley==0.0.9
+six==1.10.0
+urllib3==1.16
+Werkzeug==0.11.10
