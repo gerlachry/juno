@@ -2,16 +2,16 @@
     import React from 'react';
     import ReactDOM from 'react-dom';
     import { FilterChart as Component} from 'pyxley';
-    var filters = [{"options": {"alias": "Data", "label": "Data", "default": "Basement Temperature", "items": ["Basement Temperature", "Basement Humidity"]}, "type": "SelectButton"}];
+    var dynamic = true;
 var filter_style = "''";
-var charts = [{"options": {"chart_id": "sensors-chart", "params": {"width": 1200, "buffer": 8, "top": 40, "height": 300, "right": 40, "init_params": {"Data": "Basement Temperature"}, "description": "Data from IoT sensors", "bottom": 30, "animate_on_load": "true", "transition_on_update": "true", "small_width_threshold": 160, "small_height_threshold": 120, "target": "#sensors-chart", "x_accessor": "x", "y_accessor": "y", "title": "Sensor Data", "left": 40}, "url": "/sensors-chart/"}, "type": "MetricsGraphics"}];
-var dynamic = true;
+var charts = [{"options": {"chart_id": "sensors-chart", "params": {"title": "Sensor Data", "small_width_threshold": 160, "target": "#sensors-chart", "small_height_threshold": 120, "x_accessor": "x", "bottom": 30, "top": 40, "width": 1200, "right": 40, "animate_on_load": "true", "y_accessor": "y", "description": "Data from IoT sensors", "transition_on_update": "true", "left": 40, "buffer": 8, "height": 300, "init_params": {"Data": "Basement Temperature"}}, "url": "/sensors-chart/"}, "type": "MetricsGraphics"}];
+var filters = [{"options": {"items": ["Basement Temperature", "Basement Humidity"], "label": "Data", "alias": "Data", "default": "Basement Temperature"}, "type": "SelectButton"}];
     ReactDOM.render(
         <Component
-        filters = { filters }
+        dynamic = { dynamic }
 filter_style = { filter_style }
 charts = { charts }
-dynamic = { dynamic } />,
+filters = { filters } />,
         document.getElementById("component_id")
     );
     

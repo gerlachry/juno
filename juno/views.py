@@ -8,7 +8,7 @@ from charts.es_charts import ESSensorLineChart
 DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def build_ui(app, db):
+def build_ui(app, db, build=False):
     ui = UILayout(
         "FilterChart",
         "pyxley",
@@ -33,13 +33,14 @@ def build_ui(app, db):
     ui.add_chart(lc)
     sb = ui.render_layout(app, os.path.join(DIR, "static/layout.js"))
 
-    # Create a webpack file and bundle our javascript
-    from pyxley.utils import Webpack
-    wp = Webpack(".")
-    wp.create_webpack_config(
-        "layout.js",
-        "./static/",
-        "bundle",
-        "./static/"
-    )
-    wp.run()
+    if build:
+        # Create a webpack file and bundle our javascript
+        from pyxley.utils import Webpack
+        wp = Webpack(".")
+        wp.create_webpack_config(
+            "layout.js",
+            "./static/",
+            "bundle",
+            "./static/"
+        )
+        wp.run()

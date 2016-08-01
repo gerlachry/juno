@@ -1,3 +1,6 @@
+BUILD = False
+DEBUG = False
+
 ES_HOST = 'localhost'
 ES_PORT = '9200'
 

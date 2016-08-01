@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 elastic = ESHelper(host=config.ES_HOST, port=config.ES_PORT)
 
-build_ui(app, elastic)
 scripts = []
 css = ["./css/main.css"]
 
@@ -27,4 +26,5 @@ def latest(typ):
     return elastic.get_latest_reading(typ)
 
 if __name__ == '__main__':
+    build_ui(app, elastic, config.BUILD)
     app.run(debug=True)
