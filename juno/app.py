@@ -27,4 +27,4 @@ def latest(typ):
 
 if __name__ == '__main__':
     build_ui(app, elastic, config.BUILD)
-    app.run(debug=True)
+    app.run(debug=config.DEBUG)
