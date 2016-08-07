@@ -8,7 +8,7 @@ from charts.es_charts import ESSensorLineChart
 DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def build_ui(app, db, build=False):
+def build_ui(app, db, build=False       ):
     ui = UILayout(
         "FilterChart",
         "pyxley",
@@ -23,7 +23,7 @@ def build_ui(app, db, build=False):
     ui.add_filter(btn)
 
     # Make a Figure, add some settings, make a line plot
-    fig = Figure("/sensors-chart/", "sensors-chart")
+    fig = Figure("/juno/sensors-chart/", "sensors-chart")
     fig.graphics.transition_on_update(True)
     fig.graphics.animate_on_load()
     fig.layout.set_size(width=1200, height=300)

@@ -11,8 +11,7 @@ scripts = []
 css = ["./css/main.css"]
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/juno')
 def index():
     _scripts = ["./bundle.js"]
     return render_template('index.html',
@@ -21,10 +20,10 @@ def index():
                            page_scripts=_scripts,
                            css=css)
 
-@app.route('/latest/<typ>')
+@app.route('/juno/latest/<typ>')
 def latest(typ):
     return elastic.get_latest_reading(typ)
 
 if __name__ == '__main__':
     build_ui(app, elastic, config.BUILD)
-    app.run(host='0.0.0.0', debug=config.DEBUG)
+    app.run(host='0.0.0.0',     debug=config.DEBUG)
