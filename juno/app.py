@@ -10,7 +10,6 @@ elastic = ESHelper(host=config.ES_HOST, port=config.ES_PORT)
 scripts = []
 css = ["./css/main.css"]
 
-
 @app.route('/juno')
 def index():
     _scripts = ["./bundle.js"]
@@ -26,4 +25,6 @@ def latest(typ):
 
 if __name__ == '__main__':
     build_ui(app, elastic, config.BUILD)
-    app.run(host='0.0.0.0',     debug=config.DEBUG)
+    app.run(host='0.0.0.0', debug=config.DEBUG)
+else:
+    build_ui(app, elastic, config.BUILD)
